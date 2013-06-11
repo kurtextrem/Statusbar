@@ -1,0 +1,33 @@
+<link href="main.css" rel="stylesheet">
+<style>
+.largeBox {
+	border: 1px solid black;
+	width: 50%;
+	height: 50%;
+	top: 10%;
+	position: relative;
+}
+</style>
+<!--<div class="msg__container msg__top msg__center">
+	<div class="msg__inner">
+		<div class="msg__text">
+			Loading...
+		</div>
+	</div>
+</div>-->
+<div class="largeBox">
+	<!--<div class="msg__container msg__center">
+		<div class="msg__inner">
+			<div class="msg__text">
+				Erfolg!
+				<a href="#">Rückgängig</a>
+			</div>
+		</div>
+	</div>-->
+</div>
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="jquery.statusbar.js"></script>
+<script>
+$('body').statusbar('Loading...', {'Rückgängig': '#'})
+$('.largeBox').statusbar('E-Mail erfolgreich gelöscht.', {'Rückgängig': '#', 'Mehr Informationen': ['http://test.de', true]}, {delay: 0, timerIn: 5000})
+</script>
