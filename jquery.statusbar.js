@@ -3,6 +3,7 @@
  *
  * @author 	Kurtextrem
  * @date   	2013-06-11
+ * @version 	0.2
  */
 !function($) {
 	"use strict"
@@ -10,15 +11,15 @@
 	You can call it with
 	.statusbar('Text', {'name': ['#', true]}, {options: true}, function(){})
 	.statusbar('Text', {options: true}, function(){})
-	.statusbar('Text', {'name': ['#', true]}, function(){})
 	.statusbar({options: true}, function(){})
 	 */
 	$.fn.statusbar = function(text, urls, options, callback){
 		if ($.isFunction(options)) {
 			if (callback)
-				return console.error("Not a valid call. Syntax: ('Text', {'name': ['url', true]}, function(){})")
+				return console.error("Not a valid call. Syntax: ('Text', {'name': ['url', true]}, function(){}) or ('Text', {options: true}, function(){})")
 			callback = options
-			options = undefined
+			options = urls
+			urls = undefined
 		}
 		if (typeof text === 'object') {
 			if (callback || options)
@@ -48,7 +49,8 @@
 			html: false,
 			timerIn: 'fast',
 			timerOut: 'fast',
-			callback: function($container) {}
+			closeButton: true,
+			callback: function(status, $container, event) {}
 		}
 		$.extend(settings, options)
 
@@ -75,6 +77,9 @@
 				if (elem[1])
 					$a.attr('target', '_blank')
 				$text.append($a)
+				$a.click(function(e) {
+					settings.callback('link', $a, e)
+				})
 			})
 		if (settings.center)
 			$container.addClass('msg__center')
@@ -101,13 +106,24 @@
 		$inner.append($text)
 		$container.append($inner)
 		$container.hide()
+		if (settings.closeButton) {
+			$text.css('padding-right', '25px')
+			var $close = $('<span class="close-button">')
+			$inner.append($close)
+			$close.click(function(e) {
+				$container.fadeOut(settings.timerOut)
+				settings.callback('closed', $container, e)
+			})
+
+		}
 		this.prepend($container)
 		$container.fadeIn(settings.timerIn)
 
 		if (settings.delay)
 			window.setTimeout(function(){
 				$container.fadeOut(settings.timerOut)
+				settings.callback('closed', $container)
 			}, settings.delay)
-		return settings.callback($container)
+		return settings.callback('added', $container)
 	}
 }(jQuery)

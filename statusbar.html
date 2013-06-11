@@ -1,4 +1,4 @@
-<link href="main.css" rel="stylesheet">
+<link href="statusbar.css" rel="stylesheet">
 <style>
 .largeBox {
 	border: 1px solid black;
@@ -10,9 +10,10 @@
 </style>
 <!--<div class="msg__container msg__top msg__center">
 	<div class="msg__inner">
-		<div class="msg__text">
+		<div class="msg__text" style="margin-right:25px">
 			Loading...
 		</div>
+		<span class="close-button"></span>
 	</div>
 </div>-->
 <div class="largeBox">
@@ -28,6 +29,17 @@
 <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 <script src="jquery.statusbar.js"></script>
 <script>
-$('body').statusbar('Loading...', {'Rückgängig': '#'})
+$('body').statusbar('Loading...', {'Rückgängig': '#'}, {}, function(event, $a, e) {
+	if (event == 'link') {
+		$a.css('background-color', 'yellow')
+		e.preventDefault()
+	}
+})
 $('.largeBox').statusbar('E-Mail erfolgreich gelöscht.', {'Rückgängig': '#', 'Mehr Informationen': ['http://test.de', true]}, {delay: 0, timerIn: 5000})
+$('.largeBox').statusbar('Hehe.', {center: false, position: 'right', delay: 0}, function(event, $container) {
+	//if (event == "added")
+	//	alert('added')
+	if (event == "closed")
+		alert('closed')
+})
 </script>
