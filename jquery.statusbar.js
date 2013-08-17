@@ -1,9 +1,9 @@
 /**
  * Google alike statusbar.
  *
- * @author 	Kurtextrem
- * @date   	2013-06-11
- * @version 	0.2
+ * @author 	Jacob Groß (kurtextrem)
+ * @date   	2013-08-18
+ * @version 	0.3
  */
 !function($) {
 	"use strict"
@@ -42,6 +42,7 @@
 		}
 		var settings = {
 			text: '',
+			normalText: '',
 			urls: {},
 			delay: 10000,
 			position: 'top',
@@ -103,12 +104,13 @@
 		}
 		$container.addClass(settings.position)
 
+		$text.append('<span>'+settings.normalText+'</span>')
 		$inner.append($text)
 		$container.append($inner)
 		$container.hide()
 		if (settings.closeButton) {
-			$text.css('padding-right', '25px')
-			var $close = $('<span class="close-button">')
+			$container.addClass('msg__closeable')
+			var $close = $('<span class="msg__close-button">')
 			$inner.append($close)
 			$close.click(function(e) {
 				$container.fadeOut(settings.timerOut)

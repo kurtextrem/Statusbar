@@ -1,7 +1,12 @@
-/*! jQuery Statusbar  v0.2 */
+/*! jQuery Statusbar  v0.3 */
 .msg__container {
 	position: relative;
 	font-family: arial,sans-serif;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
 }
 .msg__inner {
 	position: absolute;
@@ -29,10 +34,10 @@
 .msg__inner .msg__text {
 	position: relative;
 	top: 8px;
-	z-index: 990;
+	z-index: 90;
 	display: inline-block;
 	margin: -6px 0;
-	padding: 6px 10px;
+	padding: 6px 0 6px 10px;
 	border: 1px solid transparent;
 	border-color: #f0c36d;
 	border-radius: 2px;
@@ -44,19 +49,24 @@
 	font-weight: bold;
 	font-size: 80%;
 }
+
+.msg__text > span {
+	font-weight: normal;
+	padding: 0 0 0 6px;
+}
+
 .msg__inner a {
 	margin-left: 10px;
 	color: #222;
 	text-decoration: underline;
 	white-space: nowrap;
-	cursor: pointer;
 }
 
-.msg__inner .close-button {
+.msg__inner  > .msg__close-button {
 	position: relative;
 	top: 11px;
 	right: 22px;
-	z-index: 991;
+	z-index: 91;
 	display: inline-block;
 	width: 16px;
 	height: 16px;
@@ -64,6 +74,10 @@
 	cursor: pointer;
 }
 
-.msg__inner .close-button:hover {
+.msg__inner > .msg__close-button:hover {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAqklEQVR4XqWRMQ6DMAxF/1Fyilyj2SmIBUG5QcTCyJA5Z8jGhlBPgRi4TmoDraVmKFJlWYrlp/g5QfwRlwEVNWVa4WzfH9jK6kCkEkBjwxOhLghheMWMELUAqqwQ4OCbnE4LJnhr5IYdqQt4DJQjhe9u4vBBmnxHHNzRFkDGjHDo0VuTAqy2vAG4NkvXXDHxbGsIGlj3e835VFNtdugma/Jk0eXq0lP//5svi4PtO01oFfYAAAAASUVORK5CYII=);
+}
+
+.msg__container.msg__closeable .msg__text {
+	padding-right: 25px;
 }

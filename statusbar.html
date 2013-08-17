@@ -26,7 +26,7 @@
 		</div>
 	</div>-->
 </div>
-<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="jquery.statusbar.js"></script>
 <script>
 $('body').statusbar('Loading...', {'Rückgängig': '#'}, {}, function(event, $a, e) {
@@ -36,7 +36,13 @@ $('body').statusbar('Loading...', {'Rückgängig': '#'}, {}, function(event, $a,
 	}
 })
 $('.largeBox').statusbar('E-Mail erfolgreich gelöscht.', {'Rückgängig': '#', 'Mehr Informationen': ['http://test.de', true]}, {delay: 0, timerIn: 5000})
-$('.largeBox').statusbar('Hehe.', {center: false, position: 'right', delay: 0}, function(event, $container) {
+$('.largeBox').statusbar('Hehe.', {center: false, position: 'right', delay: 0, normalText: 'Test.'}, function(event, $container) {
+	//if (event == "added")
+	//	alert('added')
+	if (event == "closed")
+		alert('closed')
+})
+$('.largeBox').statusbar('Left.', {center: false, position: 'left', delay: 0, closeButton: false}, function(event, $container) {
 	//if (event == "added")
 	//	alert('added')
 	if (event == "closed")
